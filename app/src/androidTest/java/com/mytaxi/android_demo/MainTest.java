@@ -29,6 +29,14 @@ import android.util.Log;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MainTest {
 
+    @Rule
+    public GrantPermissionRule mGrantPermissionRule =
+            GrantPermissionRule.grant(
+                    "android.permission.ACCESS_FINE_LOCATION");
+    @Rule
+    public ActivityTestRule<MainActivity> activityRule =
+            new ActivityTestRule<>(MainActivity.class, true, false);
+
     private static final String TEST_GROUP = "Main Test";
     private static final String USER_NAME = "crazydog335";
     private static final String PASSWORD = "venture";
@@ -36,15 +44,6 @@ public class MainTest {
     private static final String SEARCH_TEXT = "sa";
     private static final String DRIVER_NAME = "Sarah Scott";
     private static final String DRIVER_LOCATION = "6834 charles st";
-
-    @Rule
-    public ActivityTestRule<MainActivity> activityRule =
-            new ActivityTestRule<>(MainActivity.class, true, false);
-
-    @Rule
-    public GrantPermissionRule mGrantPermissionRule =
-            GrantPermissionRule.grant(
-                    "android.permission.ACCESS_FINE_LOCATION");
 
     @Before
     public void setUp() throws Exception {

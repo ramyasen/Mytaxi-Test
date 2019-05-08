@@ -38,7 +38,7 @@ jobs:
                   export LD_LIBRARY_PATH=$ANDROID_HOME/emulator/lib64:$ANDROID_HOME/emulator/lib64/qt/lib
                   emulator -list-avds 
                   sudo apt-get install pulseaudio                  
-                  emulator -avd test -no-audio -no-window -no-boot-anim -no-window -accel on
+                  emulator -avd test -skin 768x1280 -no-audio -no-window -no-boot-anim -no-window -accel on
           background: true
       - run:
           name: Wait emulator

@@ -44,7 +44,7 @@ jobs:
           name: Wait emulator
           command: |
               circle-android wait-for-boot
-              sleep 200
+              sleep 300
               adb shell input keyevent 82
       - run:
           name: Run Espresso UI Tests

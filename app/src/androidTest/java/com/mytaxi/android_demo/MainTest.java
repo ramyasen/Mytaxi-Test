@@ -44,12 +44,24 @@ public class MainTest {
     private static final String DRIVER_LOCATION = "6834 charles st";
 
     @Test
-    public void testEmptyLoginFlow() throws Exception {
+    public void testEmptyLogin() throws Exception {
         Log.d(TEST_GROUP, "Test for empty login form");
         AuthenticationPage loginPage = new AuthenticationPage();
         loginPage.checkEmptyUserNameField();
         loginPage.checkEmptyPasswordField();
         Log.d(TEST_GROUP, "Login with empty form");
+        loginPage.clickLogin();
+        Log.d(TEST_GROUP, "Expecting login failure");
+        loginPage.checkLoginFailure();
+    }
+
+    @Test
+    public void testInvalidLogin() throws Exception {
+        Log.d(TEST_GROUP, "Test for empty login form");
+        AuthenticationPage loginPage = new AuthenticationPage();
+        loginPage.typeUserName("abcddddd");
+        loginPage.typePassword("xyz");
+        Log.d(TEST_GROUP, "Login with invalid credentials");
         loginPage.clickLogin();
         Log.d(TEST_GROUP, "Expecting login failure");
         loginPage.checkLoginFailure();

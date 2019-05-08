@@ -44,22 +44,29 @@ import static org.hamcrest.Matchers.allOf;
 
 /**
  * Contains tests for login, search and call.
+ *
  * @author ramya
  */
 @RunWith(AndroidJUnit4.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MainTest {
 
+    private static final String TEST_GROUP = "Main Test";
+    private static final String USER_NAME = "crazydog335";
+    private static final String PASSWORD = "venture";
+    private static final String MAIN_PAGE_TITLE = "mytaxi demo";
+    private static final String SEARCH_TEXT = "sa";
+    private static final String DRIVER_NAME = "Sarah Scott";
+    private static final String DRIVER_LOCATION = "6834 charles st";
 
     @Rule
     public ActivityTestRule<MainActivity> activityRule =
-            new ActivityTestRule<>(MainActivity.class);
+            new ActivityTestRule<>(MainActivity.class, true, false);
 
     @Rule
     public GrantPermissionRule mGrantPermissionRule =
             GrantPermissionRule.grant(
                     "android.permission.ACCESS_FINE_LOCATION");
-
 
 
     @Before
@@ -69,7 +76,7 @@ public class MainTest {
     }
 
     @After
-    public void tearDown() throws Exception{
+    public void tearDown() throws Exception {
         //Espresso.unregisterIdlingResources(idlingResource);
     }
 
@@ -105,6 +112,7 @@ public class MainTest {
     public void verifyLoginAndMakeCall() throws InterruptedException {
 //        IdlingPolicies.setMasterPolicyTimeout(10, TimeUnit.SECONDS);
 //        IdlingPolicies.setIdlingResourceTimeout(10, TimeUnit.SECONDS);
+        activityRule.launchActivity(null);
         onView(withId(R.id.edt_username)).perform(typeText("crazydog335"));
         closeSoftKeyboard();
         onView(withId(R.id.edt_password)).perform(typeText("venture"));

@@ -21,11 +21,13 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
+import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.allOf;
 
 /**
  * Page class for Main page - menu and search
@@ -84,10 +86,13 @@ public class MainPage extends BasePage {
      */
     public final void verifyNameOccurrence(String name) {
         Log.d(PAGE_NAME, "Verifying driver name: " + name + " is present in the search result");
+        IdlingResource idlingResource = TimeIdlingResource.timeout(4000);
         ViewInteraction interaction = onView(withText(name))
                 .inRoot(withDecorView(not(Is.is(activity.getWindow().getDecorView()))));
         interaction
-                .check(matches(isDisplayed()));
+                .check(matches(allOf(isDisplayed(), isClickable())));
+        //need to use replacement for deprecation
+        unregisterIdlingResources(idlingResource);
     }
 
     /**
